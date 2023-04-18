@@ -4,7 +4,7 @@ import { CampoTexto } from '../CampoTexto/CampoTexto';
 import { ListaOpciones } from '../ListaOpciones/ListaOpciones';
 import { Boton } from '../Boton/Boton';
 
-export const Formulario = () => {
+export const Formulario = (props) => {
 
   const [ nombre, setNombre ] = useState("");
   const [ puesto, setPuesto ] = useState("");
@@ -31,7 +31,7 @@ export const Formulario = () => {
                 <CampoTexto titulo="Nombre" placeholder="Ingresar nombre" required={true} valor={nombre} setValor={setNombre} />
                 <CampoTexto titulo="Puesto" placeholder="Ingresar puesto" required={true} valor={puesto} setValor={setPuesto} />
                 <CampoTexto titulo="Foto"   placeholder="Ingresar foto"   required={true} valor={foto}   setValor={setFoto} />
-                <ListaOpciones valor={equipo} setEquipo={setEquipo} />
+                <ListaOpciones valor={equipo} setEquipo={setEquipo} equipos={props.equipos} />
                 <Boton texto="Crear" />
             </form>
         </section>
