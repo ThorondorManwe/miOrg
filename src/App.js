@@ -42,29 +42,7 @@ function App() {
     },
   ]);
 
-  /* Esta función la manejo en el componente MiOrg
-
-  const cambiarMostrar = () => {
-    setMostrarFormulario(!mostrarFormulario)
-  }
-  */
-
-  // Registrar colaborador
-
-  const registrarColaborador = (colaborador) => {
-    console.log("Nuevo colaborador", colaborador);
-    // Spread operator
-    setColaboradores([...colaboradores, colaborador] );
-  }
-
-  // Eliminar colaborador
-  const eliminarColaborador = () => {
-    console.log("Eliminar colaborador");
-  }
-
-
-
-  const equipos = [
+  const [ equipos, setEquipos ] = useState([
     {
       titulo: "Programación",
       colorPrimario: "#57C278",
@@ -100,7 +78,41 @@ function App() {
       colorPrimario: "#FF8A29",
       colorSecundario: "#FFEEDF",
     },
-  ];
+  ]);
+
+  /* Esta función la manejo en el componente MiOrg
+
+  const cambiarMostrar = () => {
+    setMostrarFormulario(!mostrarFormulario)
+  }
+  */
+
+  // Registrar colaborador
+
+  const registrarColaborador = (colaborador) => {
+    console.log("Nuevo colaborador", colaborador);
+    // Spread operator
+    setColaboradores([...colaboradores, colaborador] );
+  }
+
+  // Eliminar colaborador
+  const eliminarColaborador = () => {
+    console.log("Eliminar colaborador");
+  }
+
+  // Actualizar color de equipo
+  const actualizarColor = (color, titulo) => {
+    console.log("Actualizar: ", color, titulo);
+    const equiposActualizados = equipos.map((equipo) => {
+      if (equipo.titulo === titulo) {
+        equipo.colorPrimario = color;
+      }
+
+      return equipo;
+    });
+
+    setEquipos(equiposActualizados);
+  };
 
   return (
     <div className="App">
@@ -120,6 +132,7 @@ function App() {
                 key={equipo.titulo} 
                 colaboradores={ colaboradores.filter( colaborador => colaborador.equipo === equipo.titulo ) }
                 eliminarColaborador={eliminarColaborador}
+                actualizarColor={actualizarColor}
             />
           );
       })}
