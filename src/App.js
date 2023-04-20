@@ -4,10 +4,63 @@ import { Formulario } from './components/Formulario/Formulario';
 import { Header } from './components/Header/Header';
 import { MiOrg } from './components/MiOrg/MiOrg';
 import { Equipo } from './components/Equipo/Equipo';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
 
   const [ mostrarFormulario, setMostrarFormulario ] = useState(false);
+  const [ colaboradores, setColaboradores ] = useState([
+    {
+      equipo: "Front End",
+      foto: "https://github.com/harlandlohora.png",
+      nombre: "Harland Lohora",
+      puesto: "Instructor"
+    },
+    {
+      equipo: "Programación",
+      foto: "https://github.com/genesysaluralatam.png",
+      nombre: "Genesys Rondón",
+      puesto: "Desarrolladora de software e instructora"
+    },
+    {
+      equipo: "UX y Diseño",
+      foto: "https://github.com/JeanmarieAluraLatam.png",
+      nombre: "Jeanmarie Quijada",
+      puesto: "Instructora en Alura Latam"
+    },
+    {
+      equipo: "Programación",
+      foto: "https://github.com/christianpva.png",
+      nombre: "Christian Velasco",
+      puesto: "Head de Alura e Instructor"
+    },
+    {
+      equipo: "Innovación y Gestión",
+      foto: "https://github.com/JoseDarioGonzalezCha.png",
+      nombre: "Jose Gonzalez",
+      puesto: "Dev FullStack"
+    },
+  ]);
+
+  /* Esta función la manejo en el componente MiOrg
+
+  const cambiarMostrar = () => {
+    setMostrarFormulario(!mostrarFormulario)
+  }
+  */
+
+  // Registrar colaborador
+
+  const registrarColaborador = (colaborador) => {
+    console.log("Nuevo colaborador", colaborador);
+    // Spread operator
+    setColaboradores([...colaboradores, colaborador] );
+  }
+
+  // Eliminar colaborador
+  const eliminarColaborador = () => {
+    console.log("Eliminar colaborador");
+  }
 
 
 
@@ -43,7 +96,7 @@ function App() {
       colorSecundario: "#FFF5D9",
     },
     {
-      titulo: "Innovación y Gestion",
+      titulo: "Innovación y Gestión",
       colorPrimario: "#FF8A29",
       colorSecundario: "#FFEEDF",
     },
@@ -53,13 +106,25 @@ function App() {
     <div className="App">
       <Header />
 
-      { mostrarFormulario ? <Formulario equipos={equipos.map((equipo) => equipo.titulo)} /> : " " }
+      { mostrarFormulario 
+          ? <Formulario equipos={equipos.map((equipo) => equipo.titulo)} registrarColaborador={registrarColaborador} /> 
+          : " "  
+      }
       
       <MiOrg setMostrarFormulario={setMostrarFormulario}/>
       
       {equipos.map( (equipo) => {
-        return( <Equipo datos={equipo} key={equipo.titulo} />);
+        return( 
+            <Equipo 
+                datos={equipo} 
+                key={equipo.titulo} 
+                colaboradores={ colaboradores.filter( colaborador => colaborador.equipo === equipo.titulo ) }
+                eliminarColaborador={eliminarColaborador}
+            />
+          );
       })}
+
+      <Footer />
 
     </div>
   );

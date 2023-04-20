@@ -11,6 +11,8 @@ export const Formulario = (props) => {
   const [ foto, setFoto ] = useState("");
   const [ equipo, setEquipo ] = useState("");
 
+  const {registrarColaborador} = props;
+
   const manejarEnvio = (e) => {
     e.preventDefault();
     console.log("manejar el envio", e);
@@ -20,7 +22,7 @@ export const Formulario = (props) => {
       foto: foto,
       equipo: equipo,
     }
-    console.log(datosAEnviar);
+    registrarColaborador(datosAEnviar);
   }
 
   return (
